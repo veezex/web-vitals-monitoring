@@ -14,14 +14,14 @@ import (
 )
 
 /*
-  - Resquest example:
-    fetch('http://localhost:6510/metric', {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({id: "id-page", client: "mobile", uri: "/best", name: 'name v', value: 1.1, target: 'target t', rating: 'rating r'})
-    })
+	    Resquest example:
+	    fetch('http://localhost:6510/metric', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({id: "id-page", client: "mobile", uri: "/best", name: 'name v', value: 1.1, target: 'target t', rating: 'rating r'})
+	    })
 */
 func createHandleMetric() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {

@@ -4,7 +4,7 @@
 
 All configurations are located in the .env file.
 
-Port from .env should be open for the server to work.
+Port from .env should be open for the server to work. (for certbot to work port 80 should be open)
 
 #### Install the dependencies
 

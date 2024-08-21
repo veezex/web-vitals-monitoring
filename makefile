@@ -2,7 +2,7 @@ include .env
 
 # Variables
 GO_BUILD_CMD=go build -o serverapp cmd/main.go
-CERTBOT_CMD=certbot certonly --standalone -d $(DOMAIN) --non-interactive --agree-tos -m admin@$(DOMAIN) --http-01-port=$(PORT)
+CERTBOT_CMD=certbot certonly --standalone -d $(DOMAIN) --non-interactive --agree-tos -m admin@$(DOMAIN) --http-01-port=80
 MKDIR_CERTS=mkdir -p /app/certs
 CP_AND_CHMOD_CERTS=cp /etc/letsencrypt/live/$(DOMAIN)/* /app/certs && chmod -R 740 /app/certs
 

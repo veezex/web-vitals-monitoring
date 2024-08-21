@@ -1,32 +1,38 @@
-## A golang server that allows recording new metrics into sqlite
+## A server that allows recording new metrics into SQLite
 
 All configurations are located in the .env file.
+Port from .env should be open for the server to work. (for Certbot to work, port 80 should be open)
 
-Port from .env should be open for the server to work. (for certbot to work port 80 should be open)
-
-#### Install the dependencies (debian)
+### Install the dependencies (Debian)
+```bash
+apt install sqlite3 git make build-essential
+```
+Additionally, you need to install [Go 1.21 or later](https://go.dev/doc/install).
 
 ```bash
-apt install sqlite3 certbot git make build-essential -y
+git clone https://github.com/veezex/web-vitals-monitoring.git
 ```
-Additionally, you need to install the go compiler.
+Next, you will need to create a .env (see .env.example) file in the project directory.
+After that, you can run the server.
 
-### Create service (optionally)
+```bash
+make build
+./serverapp
+```
+
+## Create service (optionally)
 ```bash
 sudo vi /etc/systemd/system/ww.service
 ```
-
-```bash
+```
 [Unit]
 Description=Go Server (WW)
 After=network.target
-
 [Service]
 User=admin
 Group=admin
-ExecStart=/home/admin/executable
+ExecStart=/home/admin/web-vitals-monitoring/serverapp
 Restart=always
-
 [Install]
 WantedBy=multi-user.target
 ```
@@ -34,12 +40,12 @@ WantedBy=multi-user.target
 ## HTTPS support
 
 ### Create certificate
-
 ```bash
+apt install certbot
 make certs
 ```
 
-### Change the permissions of the certificate files and copy the to the project dir
+### Change the permissions of the certificate files and copy them to the project directory
 ```bash
 chown admin:admin /etc/letsencrypt/live/domain.com/fullchain.pem
 chown admin:admin /etc/letsencrypt/live/domain.com/privkey.pem

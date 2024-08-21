@@ -87,7 +87,7 @@ func createHandleScript(config config.Config) http.HandlerFunc {
 	var tplBuffer bytes.Buffer
 	err = tmpl.Execute(&tplBuffer, data)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to execute template: %s", err)
 	}
 
 	// Create a minifier
@@ -98,7 +98,7 @@ func createHandleScript(config config.Config) http.HandlerFunc {
 	var minifiedJS bytes.Buffer
 	err = m.Minify("text/javascript", &minifiedJS, &tplBuffer)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to minify JS: %s", err)
 	}
 
 	// Save the minified result in a variable

@@ -4,32 +4,22 @@ import {
   onLCP,
 } from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js?module';
 
-function reportWV(value) {
-  fetch('{{ .Protocol }}://{{ .Domain }}:{{ .Port }}/metric', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(value),
-  });
-}
-
 onCLS(metric => {
-  reportWV({
+  reportMetric({
     ...sharedMetricsProps(metric),
     target: metric.attribution?.largestShiftTarget ?? '',
   });
 });
 
 onLCP(metric => {
-  reportWV({
+  reportMetric({
     ...sharedMetricsProps(metric),
     target: metric.attribution.element,
   });
 });
 
 onINP(metric => {
-  reportWV({
+  reportMetric({
     ...sharedMetricsProps(metric),
     target: metric.attribution.interactionTarget,
   });
@@ -42,11 +32,11 @@ function sharedMetricsProps(metric) {
     value: metric.value,
     rating: metric.rating,
     uri: location.pathname,
-    client: getDeviceTypeVW(),
+    client: getDeviceType(),
   }
 }
 
-function getDeviceTypeVW() {
+function getDeviceType() {
   const userAgent = navigator.userAgent || navigator.vendor
   const screenWidth = window.innerWidth
 
@@ -57,4 +47,14 @@ function getDeviceTypeVW() {
     return 'mobile'
   }
   return 'desktop'
+}
+
+function reportMetric(value) {
+  fetch('{{ .Protocol }}://{{ .Domain }}:{{ .Port }}/metric', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(value),
+  });
 }

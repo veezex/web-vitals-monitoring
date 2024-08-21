@@ -90,18 +90,18 @@ func createHandleScript(config config.Config) http.HandlerFunc {
 		panic(err)
 	}
 
-	// Создаём минификатор
+	// Create a minifier
 	m := minify.New()
 	m.AddFunc("text/javascript", js.Minify)
 
-	// Минифицируем результат
+	// Minify the result
 	var minifiedJS bytes.Buffer
 	err = m.Minify("text/javascript", &minifiedJS, &tplBuffer)
 	if err != nil {
 		panic(err)
 	}
 
-	// Сохраняем минифицированный результат в переменной
+	// Save the minified result in a variable
 	renderedJS := minifiedJS.Bytes()
 
 	return func(w http.ResponseWriter, r *http.Request) {

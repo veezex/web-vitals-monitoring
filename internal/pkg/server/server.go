@@ -14,7 +14,7 @@ func RunServer(config config.Config, db db.DB) error {
 
 	fmt.Println("Server is running on port:", config.GetPort())
 	fmt.Println("Client script:")
-	fmt.Printf(scriptExample(config))
+	fmt.Println(scriptExample(config))
 
 	if config.GetUseHttps() {
 		return http.ListenAndServeTLS(":"+strconv.Itoa(config.GetPort()), "fullchain.pem", "privkey.pem", nil)

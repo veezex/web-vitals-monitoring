@@ -8,12 +8,8 @@ import (
 	"strconv"
 )
 
-var dbInstance db.DB
-
 func RunServer(config config.Config, db db.DB) error {
-	dbInstance = db
-
-	http.HandleFunc("/metric", createHandleMetric())
+	http.HandleFunc("/metric", createHandleMetric(db))
 	http.HandleFunc("/script", createHandleScript(config))
 
 	fmt.Println("Server is running on port:", config.GetPort())

@@ -7,6 +7,7 @@ import (
 	"github.com/tdewolff/minify/v2"
 	"github.com/tdewolff/minify/v2/js"
 	"github.com/veezex/web-vitals-monitoring/server/internal/pkg/config"
+	"github.com/veezex/web-vitals-monitoring/server/internal/pkg/db"
 	"github.com/veezex/web-vitals-monitoring/server/internal/pkg/metric"
 	"log"
 	"net/http"
@@ -23,7 +24,7 @@ import (
 			body: JSON.stringify({id: "id-page", client: "mobile", uri: "/best", name: 'name v', value: 1.1, target: 'target t', rating: 'rating r'})
 	    })
 */
-func createHandleMetric() http.HandlerFunc {
+func createHandleMetric(dbInstance db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		enableCors(&w)
 

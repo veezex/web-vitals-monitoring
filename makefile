@@ -1,3 +1,5 @@
+include .env
+
 # Variables
 GO_BUILD_CMD=go build -o serverapp cmd/main.go
 CERTBOT_CMD=certbot certonly --standalone -d $(DOMAIN) --non-interactive --agree-tos -m admin@$(DOMAIN) --http-01-port=$(PORT)

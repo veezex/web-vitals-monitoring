@@ -6,12 +6,6 @@ All configurations are located in the .env file.
 
 Port from .env should be open for the server to work.
 
-#### Script example
-
-```html
-  <script type="module" async src="http://localhost:6510/script"></script>
-```
-
 #### Install the dependencies
 
 ```bash
@@ -19,7 +13,7 @@ apt install sqlite3 certbot git make -y
 ```
 Additionally, you need to install the go compiler.
 
-### Create service 
+### Create service (optionally)
 ```bash
 sudo vi /etc/systemd/system/ww.service
 ```
@@ -39,7 +33,9 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-### Create certificate (if use https)
+## HTTPS support
+
+### Create certificate
 
 ```bash
 make certs
@@ -47,6 +43,6 @@ make certs
 
 ### Change the permissions of the certificate files and copy the to the project dir
 ```bash
-chown admin:admin /etc/letsencrypt/live/wwsg1.aktee.top/fullchain.pem
-chown admin:admin /etc/letsencrypt/live/wwsg1.aktee.top/privkey.pem
+chown admin:admin /etc/letsencrypt/live/domain.com/fullchain.pem
+chown admin:admin /etc/letsencrypt/live/domain.com/privkey.pem
 ```

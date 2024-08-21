@@ -15,8 +15,9 @@ Port from .env should be open for the server to work.
 #### Install the dependencies
 
 ```bash
-apt install sqlite3 certbot go git make -y
+apt install sqlite3 certbot git make -y
 ```
+Additionally, you need to install the go compiler.
 
 ### Create service 
 ```bash

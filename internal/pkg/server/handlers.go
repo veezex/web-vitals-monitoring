@@ -71,7 +71,6 @@ func createHandleScript(config config.Config) http.HandlerFunc {
 	tmpl, err := template.ParseFiles("templates/client.js")
 	if err != nil {
 		log.Fatalf("Failed to parse template: %s", err)
-		return nil
 	}
 
 	data := struct {

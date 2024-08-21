@@ -1,15 +1,13 @@
-# Consists of the following parts:
-
 ## A golang server that allows recording new metrics into sqlite
 
 All configurations are located in the .env file.
 
 Port from .env should be open for the server to work. (for certbot to work port 80 should be open)
 
-#### Install the dependencies
+#### Install the dependencies (debian)
 
 ```bash
-apt install sqlite3 certbot git make -y
+apt install sqlite3 certbot git make build-essential -y
 ```
 Additionally, you need to install the go compiler.
 

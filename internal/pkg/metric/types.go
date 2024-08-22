@@ -3,7 +3,8 @@ package metric
 type Metric interface {
 	GetName() string
 	GetValue() float64
-	GetTarget() string
+	GetDelta() float64
+	GetAttribution() string
 	GetRating() string
 	GetUri() string
 	GetClient() string

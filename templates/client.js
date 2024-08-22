@@ -1,29 +1,14 @@
-import {
-  onCLS,
-  onINP,
-  onLCP,
-} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js?module';
+import {onCLS, onINP, onLCP, onFCP, onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js?module';
 
-onCLS(metric => {
-  reportMetric({
-    ...sharedMetricsProps(metric),
-    target: metric.attribution?.largestShiftTarget ?? '',
-  });
-});
+onFCP(reportMetric);
 
-onLCP(metric => {
-  reportMetric({
-    ...sharedMetricsProps(metric),
-    target: metric.attribution.element,
-  });
-});
+onTTFB(reportMetric);
 
-onINP(metric => {
-  reportMetric({
-    ...sharedMetricsProps(metric),
-    target: metric.attribution.interactionTarget,
-  });
-});
+onCLS(reportMetric);
+
+onLCP(reportMetric);
+
+onINP(reportMetric);
 
 function sharedMetricsProps(metric) {
   return {
@@ -33,6 +18,7 @@ function sharedMetricsProps(metric) {
     rating: metric.rating,
     uri: location.pathname,
     client: getDeviceType(),
+    attribution: JSON.stringify(metric.attribution),
   }
 }
 
@@ -55,6 +41,6 @@ function reportMetric(value) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(value),
+    body: JSON.stringify(sharedMetricsProps(value)),
   });
 }

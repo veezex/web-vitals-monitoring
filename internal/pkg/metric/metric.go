@@ -6,13 +6,14 @@ import (
 )
 
 type metricImpl struct {
-	id     string
-	uri    string
-	client string
-	name   string
-	value  float64
-	target string
-	rating string
+	id          string
+	uri         string
+	client      string
+	name        string
+	value       float64
+	delta       float64
+	attribution string
+	rating      string
 }
 
 func Parse(in map[string]interface{}) (Metric, error) {
@@ -21,13 +22,13 @@ func Parse(in map[string]interface{}) (Metric, error) {
 	}
 
 	return &metricImpl{
-		id:     in["id"].(string),
-		uri:    in["uri"].(string),
-		client: in["client"].(string),
-		name:   in["name"].(string),
-		value:  in["value"].(float64),
-		target: in["target"].(string),
-		rating: in["rating"].(string),
+		id:          in["id"].(string),
+		uri:         in["uri"].(string),
+		client:      in["client"].(string),
+		name:        in["name"].(string),
+		value:       in["value"].(float64),
+		attribution: in["target"].(string),
+		rating:      in["rating"].(string),
 	}, nil
 }
 
@@ -47,14 +48,18 @@ func (m *metricImpl) GetValue() float64 {
 	return m.value
 }
 
-func (m *metricImpl) GetTarget() string {
-	return m.target
-}
-
 func (m *metricImpl) GetRating() string {
 	return m.rating
 }
 
 func (m *metricImpl) GetID() string {
 	return m.id
+}
+
+func (m *metricImpl) GetAttribution() string {
+	return m.attribution
+}
+
+func (m *metricImpl) GetDelta() float64 {
+	return m.delta
 }

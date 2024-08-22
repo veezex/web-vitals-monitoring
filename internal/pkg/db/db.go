@@ -28,9 +28,10 @@ func New(path string) (DB, error) {
         name TEXT,
         uri TEXT,
         client TEXT,
+        delta REAL,
         value REAL,
-        target TEXT,
         rating TEXT,
+        attribution TEXT,
 		timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     );`
 	if _, err := db.Exec(createTableSQL); err != nil {
@@ -42,15 +43,17 @@ func New(path string) (DB, error) {
 }
 
 func (d *dbImpl) SaveMetric(m metric.Metric) error {
-	insertUpdateSQL := `INSERT INTO metrics (id, name, uri, client, value, target, rating) VALUES (?, ?, ?, ?, ?, ?, ?)
-                        ON CONFLICT(id) DO UPDATE SET
-                        name = excluded.name,
-						uri = excluded.uri,
-						client = excluded.client,
-                        value = excluded.value,
-                        target = excluded.target,
-                        rating = excluded.rating;`
-	if _, err := d.db.Exec(insertUpdateSQL, m.GetID(), m.GetName(), m.GetUri(), m.GetClient(), m.GetValue(), m.GetTarget(), m.GetRating()); err != nil {
+	insertUpdateSQL := `INSERT INTO metrics (id, name, uri, client, value, delta, attribution, rating) VALUES (?, ?, ?, ?, ?, ?, ?)`
+	if _, err := d.db.Exec(
+		insertUpdateSQL,
+		m.GetID(),
+		m.GetName(),
+		m.GetUri(),
+		m.GetClient(),
+		m.GetValue(),
+		m.GetDelta(),
+		m.GetAttribution(),
+		m.GetRating()); err != nil {
 		return fmt.Errorf("Failed to insert/update record: %s", err)
 	}
 

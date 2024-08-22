@@ -27,7 +27,8 @@ func Parse(in map[string]interface{}) (Metric, error) {
 		client:      in["client"].(string),
 		name:        in["name"].(string),
 		value:       in["value"].(float64),
-		attribution: in["target"].(string),
+		delta:       in["delta"].(float64),
+		attribution: in["attribution"].(string),
 		rating:      in["rating"].(string),
 	}, nil
 }

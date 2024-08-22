@@ -21,7 +21,16 @@ import (
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({id: "id-page", client: "mobile", uri: "/best", name: 'name v', value: 1.1, target: 'target t', rating: 'rating r'})
+			body: JSON.stringify({
+				id: "id-page",
+				client: "mobile",
+				uri: "/best",
+				name: 'name v',
+				value: 1.1,
+				delta: 0.1,
+				target: 'target t',
+				attribution: '{}'
+			})
 	    })
 */
 func createHandleMetric(dbInstance db.DB) http.HandlerFunc {

@@ -15,6 +15,7 @@ function sharedMetricsProps(metric) {
     id: metric.id,
     name: metric.name,
     value: metric.value,
+    delta: metric.delta,
     rating: metric.rating,
     uri: location.pathname,
     client: getDeviceType(),

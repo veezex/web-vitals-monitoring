@@ -17,7 +17,7 @@ type metricImpl struct {
 }
 
 func Parse(in map[string]interface{}) (Metric, error) {
-	if in["id"] == nil || in["client"] == nil || in["uri"] == nil || in["name"] == nil || in["value"] == nil || in["target"] == nil || in["rating"] == nil {
+	if in["id"] == nil || in["client"] == nil || in["uri"] == nil || in["name"] == nil || in["value"] == nil || in["delta"] == nil || in["attribution"] == nil || in["rating"] == nil {
 		return nil, fmt.Errorf("Invalid input: missing required fields")
 	}
 

@@ -59,7 +59,7 @@ func createHandleMetric(dbInstance db.DB) http.HandlerFunc {
 
 			m, err := metric.Parse(data)
 			if err != nil {
-				http.Error(w, "Bad request", http.StatusBadRequest)
+				http.Error(w, "Malformed data", http.StatusBadRequest)
 				return
 			}
 

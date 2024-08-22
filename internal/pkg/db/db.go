@@ -44,7 +44,7 @@ func New(path string) (DB, error) {
 }
 
 func (d *dbImpl) SaveMetric(m metric.Metric) error {
-	insertUpdateSQL := `INSERT INTO metrics (metric_id, name, uri, client, value, delta, attribution, rating) VALUES (?, ?, ?, ?, ?, ?, ?)`
+	insertUpdateSQL := `INSERT INTO metrics (metric_id, name, uri, client, value, delta, attribution, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
 	if _, err := d.db.Exec(
 		insertUpdateSQL,
 		m.GetID(),

@@ -10,7 +10,7 @@ onLCP(reportMetric);
 
 onINP(reportMetric);
 
-function sharedMetricsProps(metric) {
+function formatMetric(metric) {
   return {
     id: metric.id,
     name: metric.name,
@@ -42,6 +42,6 @@ function reportMetric(value) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(sharedMetricsProps(value)),
+    body: JSON.stringify(formatMetric(value)),
   });
 }
